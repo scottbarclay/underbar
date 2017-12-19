@@ -5,6 +5,7 @@
 
     describe('identity', function() {
       checkForNativeMethods(function() {
+
         _.identity(1);
       });
 
