@@ -99,7 +99,7 @@
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
     var acc = [];
-    var inverse =  _.filter(collection, inverse);
+    var inverse =  _.filter(collection, test);
     if(inverse[0] <= collection[0]) {
       _.each(inverse, function(item, index) {
         acc.push(item + 1); 
