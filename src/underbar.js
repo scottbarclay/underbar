@@ -117,35 +117,24 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
-    var acc = [];
-    //  return _.filter(array, function(element) {
-    //   return acc.includes(element) === false;
-    // });
-    // //if(isSorted) {
-      _.each(array, function(item, index) {
-        if(acc === [] || !acc.includes(item)) {
-          acc.push(item);
-      //   }
-    //   // });
-    // // } else {
-    //   // _.each(array, function(item, index) {
-         }
-
-       });
-      return acc;
-    // }
-
-
-
-    //return dupFreeArray;
+  var acc = [];
+    _.each(array, function(item, index) {
+      if(acc === [] || !acc.includes(item)) {
+        acc.push(item);
+      }
+    });
+    return acc;
   };
 
 
   // Return the results of applying an iterator to each element.
   _.map = function(collection, iterator) {
-    // map() is a useful primitive iteration function that works a lot
-    // like each(), but in addition to running the operation on all
-    // the members, it also maintains an array of results.
+    var acc = [];
+    _.each(collection, function(item, index) {
+      item = iterator(item);
+        acc.push(item);
+    });
+    return acc;
   };
 
   /*
