@@ -116,7 +116,28 @@
   };
 
   // Produce a duplicate-free version of the array.
-  _.uniq = function(array, isSorted, iterator) {
+  _.uniq = function(array) {
+    var acc = [];
+    //  return _.filter(array, function(element) {
+    //   return acc.includes(element) === false;
+    // });
+    // //if(isSorted) {
+      _.each(array, function(item, index) {
+        if(acc === [] || !acc.includes(item)) {
+          acc.push(item);
+      //   }
+    //   // });
+    // // } else {
+    //   // _.each(array, function(item, index) {
+         }
+
+       });
+      return acc;
+    // }
+
+
+
+    //return dupFreeArray;
   };
 
 
