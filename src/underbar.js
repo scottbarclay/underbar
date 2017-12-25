@@ -188,22 +188,35 @@
     return memo;
   };
 
+
   // Determine if the array or object contains a given value (using `===`).
+  // TIP: Many iteration problems can be most easily expressed in
+  // terms of reduce(). Here's a freebie to demonstrate!
   _.contains = function(collection, target) {
-    // TIP: Many iteration problems can be most easily expressed in
-    // terms of reduce(). Here's a freebie to demonstrate!
-    return _.reduce(collection, function(wasFound, item) {
-      if (wasFound) {
-        return true;
+    var hasItem = false;
+    _.each(collection, function(item, index) {
+      if(item === target) {
+        hasItem = true;
       }
-      return item === target;
-    }, false);
+    });
+    return hasItem;
   };
 
 
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
+    if(collection = [] || !iterator) {
+      return true;
+    }
+    var result = true;
+    _.each(collection, function(item, index) {
+      item = Boolean(iterator(item));
+        if(item === false) {
+          result = false;
+        }      
+    });
+    return result;
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
