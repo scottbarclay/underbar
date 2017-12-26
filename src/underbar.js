@@ -308,7 +308,6 @@
     // time it's called.
     var alreadyCalled = false;
     var result;
-
     // TIP: We'll return a new function that delegates to the old one, but only
     // if it hasn't been called before.
     return function() {
@@ -332,6 +331,31 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    // TIP: These variables are stored in a "closure scope" (worth researching),
+    // so that they'll remain available to the newly-generated function every
+    // time it's called.
+    var memos = {};
+    var slice = Array.prototype.slice;
+    // TIP: We'll return a new function that delegates to the old one, but only
+    // if it hasn't been called before.
+    return function() {
+      var result = '';
+      var funcArgs = slice.call(arguments);
+      _.each(memos, function(memo) {
+        if(JSON.stringify(funcArgs) === JSON.stringify(memos['args'])) {
+          result = memos['result'];
+        }
+      });
+      if(!result) {
+        // TIP: .apply(this, arguments) is the standard way to pass on all of the
+        // infromation from one function call to another.
+        result = func.apply(this, funcArgs);
+        memos['args'] = funcArgs;
+        memos['result'] = result;
+      }
+      // The new function always returns the originally computed result.
+      return result;
+    }
   };
 
   // Delays a function for the given number of milliseconds, and then calls
@@ -341,6 +365,10 @@
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+    // var args = Array.prototype.slice.call(arguments);
+    // return setTimeout(function() {
+    //   func(args.slice(2);
+    // }, args[1]);
   };
 
 
